@@ -3,7 +3,6 @@
 
 CBullet::CBullet()
 {
-	m_tDirection = { 0.f,-1.f };
 }
 
 CBullet::~CBullet()
@@ -25,8 +24,9 @@ int CBullet::Update()
 	if (Is_Dead())
 		return OBJ_DEAD;
 
-	m_tInfo.fX += m_tVel.vX * m_fSpeed;
-	m_tInfo.fY += m_tVel.vY * m_fSpeed;
+	m_tVel = m_tDirection * m_fSpeed;
+	m_tInfo.fX += m_tVel.vX;
+	m_tInfo.fY += m_tVel.vY;
 
 	__super::Update_Rect();
 

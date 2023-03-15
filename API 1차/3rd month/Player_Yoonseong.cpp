@@ -3,6 +3,7 @@
 #include "Bow.h"
 #include "KeyBoardMgr.h"
 #include "ExtremeArrow.h"
+#include "SpiralBullet.h"
 
 CPlayer_Yoonseong::CPlayer_Yoonseong()
 	: m_pBow(nullptr),
@@ -151,9 +152,17 @@ void CPlayer_Yoonseong::Key_Input()
 
 	if ((GetAsyncKeyState(VK_RBUTTON) == (SHORT)0x0000) && CKeyBoardMgr::m_bRButtonPressed)
 	{
-		FLOAT fArrowSpeed = 5.f + MAXARRPOW * (m_fBowPower / 90.f);
+		FLOAT fArrowSpeed = 5.f + MAXARRPOW* 2.f * (m_fBowPower / 90.f);
 		m_pGuidedBulletList->push_back(new CExtremeArrow(m_tArrowHead, m_tDirection, fArrowSpeed));
 		m_pGuidedBulletList->back()->Init();
+		m_pBulletList->push_back(new CSpiralBullet());
+		m_pBulletList->back()->Init();
+		dynamic_cast<CSpiralBullet*>(m_pBulletList->back())->Set_Center(m_pGuidedBulletList->back());
+		dynamic_cast<CSpiralBullet*>(m_pBulletList->back())->Set_Side(1);
+		m_pBulletList->push_back(new CSpiralBullet());
+		m_pBulletList->back()->Init();
+		dynamic_cast<CSpiralBullet*>(m_pBulletList->back())->Set_Center(m_pGuidedBulletList->back());
+		dynamic_cast<CSpiralBullet*>(m_pBulletList->back())->Set_Side(-1);
 		m_fBowPower = 0.f;
 		CKeyBoardMgr::m_bRButtonPressed = false;
 	}

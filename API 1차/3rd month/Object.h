@@ -23,7 +23,7 @@ public:
 	void		Set_Pos(float _fX, float _fY);
 	void		Draw_Figure(HDC hDC);
 	void		Set_Dead() { m_bDead = true; }
-	void		Set_DirVec(const Vec2& _vel) { m_tVel = _vel; }
+	void		Set_DirVec(const Vec2& _vel) { m_tDirection = _vel; }
 	Vec2&		Get_Velocity() {return m_tVel; }
 	FIGURETYPE	Get_Figure() { return m_eFigure; }
 	FLOAT		Get_AimRadian() { return m_fAimRadian; }

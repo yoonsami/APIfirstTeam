@@ -5,9 +5,9 @@ CExtremeArrow::CExtremeArrow(Vec2& ArrowHead, Vec2& _Vel, FLOAT Speed)
 	: CArrow(ArrowHead,_Vel,Speed),
 	m_pTargetList(nullptr),
 	m_pTarget(nullptr),
-	m_fDetectRange(50.f)
+	m_fDetectRange(0.f)
 {
-	m_fSpeed = 10.f;
+	m_fSpeed = 7.f;
 }
 
 CExtremeArrow::~CExtremeArrow()
@@ -56,6 +56,7 @@ void CExtremeArrow::Render(HDC hDC)
 void CExtremeArrow::Find_ClosestTarget()
 {
 	FLOAT Min = 999;
+	if (m_tVel.vY > 0) m_fDetectRange = 400.f;
 	if (m_pTargetList)
 		for (auto& i : *m_pTargetList)
 		{

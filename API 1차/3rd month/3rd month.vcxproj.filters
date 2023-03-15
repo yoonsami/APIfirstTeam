@@ -67,6 +67,9 @@
     <Filter Include="01.Object\01.Bullet\02.RotationBullet">
       <UniqueIdentifier>{cf79e7fe-3e87-43a5-965f-bd3b968a56c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\01.Bullet\03.SpiralBullet">
+      <UniqueIdentifier>{40de1a64-16c3-457e-be19-f2fe0a013660}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="RotationBullet.h">
       <Filter>01.Object\01.Bullet\02.RotationBullet</Filter>
     </ClInclude>
+    <ClInclude Include="SpiralBullet.h">
+      <Filter>01.Object\01.Bullet\03.SpiralBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rd month.cpp">
@@ -199,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="RotationBullet.cpp">
       <Filter>01.Object\01.Bullet\02.RotationBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiralBullet.cpp">
+      <Filter>01.Object\01.Bullet\03.SpiralBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

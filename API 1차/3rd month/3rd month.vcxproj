@@ -175,6 +175,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RotationBullet.h" />
     <ClInclude Include="Shield.h" />
+    <ClInclude Include="SpiralBullet.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -201,6 +202,7 @@
     <ClCompile Include="Player_Yoonseong.cpp" />
     <ClCompile Include="RotationBullet.cpp" />
     <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="SpiralBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3rd month.rc" />
