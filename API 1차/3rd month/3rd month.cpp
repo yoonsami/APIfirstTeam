@@ -51,7 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     CMainGame mainGame;
     mainGame.Init();
-
+    srand(static_cast<UINT>(time(nullptr)));
     DWORD64 dwOldTime = GetTickCount64();
     // 기본 메시지 루프입니다:
     while (true)

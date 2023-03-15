@@ -14,9 +14,9 @@ CBullet::~CBullet()
 
 void CBullet::Init()
 {
-	m_tInfo.fCX = 20.f;
+	m_tInfo.fCX = 10.f;
 	m_tInfo.fCY = 20.f;
-	m_fSpeed = 10.f;
+	m_fSpeed = 2.f;
 
 	m_eFigure = FIGURETYPE::FT_CIRCLE;
 }

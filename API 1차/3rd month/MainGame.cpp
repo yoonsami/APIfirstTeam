@@ -43,6 +43,7 @@ void CMainGame::Update()
 				int iPattern = rand() % 5;
 				m_objList[OT_MONSTER].push_back(CAbstractFactory<CMonster>::Create());
 				dynamic_cast<CMonster*>(m_objList[OT_MONSTER].back())->Set_Pattern(iPattern);
+				dynamic_cast<CMonster*>(m_objList[OT_MONSTER].back())->Set_Bullet(&m_objList[OT_MONSTERBULLET]);
 			}
 		}
 	}
@@ -74,6 +75,8 @@ void CMainGame::Late_Update()
 		}
 	}
 	CCollisionMgr::CheckCollide(m_objList[OT_MONSTER], m_objList[OT_BULLET]);
+	CCollisionMgr::CheckCollide(m_objList[OT_BULLET], m_objList[OT_MONSTERBULLET]);
+	CCollisionMgr::CheckCollide(m_objList[OT_PLAYER], m_objList[OT_MONSTERBULLET]);
 }
 
 void CMainGame::Render()
@@ -117,4 +120,4 @@ FLOAT CMainGame::GameSpeed = 1.f;
 // 반발계수 : 완전비탄성 = 0, 완전탄성 1
 FLOAT CMainGame::COR = 0.f;
 
-INT CMainGame::iStageNum = STAGE_THREE;
+INT CMainGame::iStageNum = STAGE_ONE;

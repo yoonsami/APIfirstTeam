@@ -34,6 +34,7 @@ private:
 	Vec2			m_tArrowHead;
 	FLOAT			m_fArrowSize;
 	DWORD64			m_dwBulletCreTime;
-	
+	DWORD64			m_dwShieldCreTime;
+	Vec2			m_tKeyInputVec;
 };
 

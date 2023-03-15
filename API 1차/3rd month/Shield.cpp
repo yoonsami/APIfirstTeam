@@ -12,11 +12,12 @@ void CShield::Init()
 	m_eFigure = FIGURETYPE::FT_CIRCLE;
 	m_tInfo.fCX = 20.f;
 	m_tInfo.fCY = 20.f;
-
 }
 
 int CShield::Update()
 {
+	if (Is_Dead())
+		return OBJ_DEAD;
 	Set_Radian();
 	Set_PosInfo();
 

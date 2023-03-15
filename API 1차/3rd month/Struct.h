@@ -14,6 +14,7 @@ struct Vec2
 		return atan2f(vY, vX);
 	}
 	FLOAT Get_Size() { return sqrtf(powf(vX, 2) + powf(vY, 2)); }
+	Vec2 Get_DirVec() { if (Get_Size() != 0) return Vec2{ vX / Get_Size(), vY / Get_Size() }; else return Vec2{ 0.f,0.f }; }
 };
 
 struct INFO
@@ -32,7 +33,8 @@ struct INFO
 
 struct STAT
 {
-	float m_fAttack;
-	float m_fMaxHp;
-	float m_fHp;
+	FLOAT m_fAttack;
+	FLOAT m_fMaxHp;
+	FLOAT m_fHp;
+	FLOAT Get_HpRatio() { if (m_fMaxHp > 0) return m_fHp / m_fMaxHp; else return 0; }
 };

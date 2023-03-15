@@ -17,10 +17,10 @@ CObject::~CObject()
 
 void CObject::Update_Rect(void)
 {
-	m_tRect.left	= static_cast<LONG>(m_tInfo.fX - (m_tInfo.fCX * 0.5f));
-	m_tRect.top		= static_cast<LONG>(m_tInfo.fY - (m_tInfo.fCY * 0.5f));
-	m_tRect.right	= static_cast<LONG>(m_tInfo.fX + (m_tInfo.fCX * 0.5f));
-	m_tRect.bottom	= static_cast<LONG>(m_tInfo.fY + (m_tInfo.fCY * 0.5f));
+	m_tRect.left = static_cast<LONG>(m_tInfo.fX - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
+	m_tRect.top = static_cast<LONG>(m_tInfo.fY - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
+	m_tRect.right = static_cast<LONG>(m_tInfo.fX + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
+	m_tRect.bottom = static_cast<LONG>(m_tInfo.fY + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
 }
 
 void CObject::Set_Pos(float _fX, float _fY)

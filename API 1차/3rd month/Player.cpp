@@ -7,8 +7,8 @@
 #include "Bow.h"
 #include "MainGame.h"
 
-CPlayer::CPlayer() :m_pBulletList(nullptr), m_pShieldList(nullptr), m_dwBulletCreTime(GetTickCount64()),
-m_pBow(nullptr), m_fBowPower(0.f), m_tArrowTail{}, m_tArrowHead{},m_fArrowSize(ARROWSIZE)
+CPlayer::CPlayer() :m_pBulletList(nullptr), m_pShieldList(nullptr), m_dwBulletCreTime(GetTickCount64()), m_dwShieldCreTime(GetTickCount64()),
+m_pBow(nullptr), m_fBowPower(0.f), m_tArrowTail{}, m_tArrowHead{},m_fArrowSize(ARROWSIZE), m_tKeyInputVec{}
 {
 
 }
@@ -38,7 +38,18 @@ void CPlayer::Init()
 		m_pBow = new CBow(this);
 		m_pBow->Init();
 	}
-	
+	else if (CMainGame::iStageNum == STAGE_THREE)
+	{
+		m_tInfo.fX = WINCX / 2.f;
+		m_tInfo.fY = WINCY / 2.f;
+		m_tInfo.fCX = 100.f;
+		m_tInfo.fCY = 100.f;
+		m_fSpeed = 10.f;
+		m_fAimRadian = 0;
+		m_tStat.m_fAttack = 10.f;
+		m_tStat.m_fMaxHp = 100;
+		m_tStat.m_fHp = m_tStat.m_fMaxHp;
+	}
 }
 
 int CPlayer::Update()
@@ -65,15 +76,12 @@ void CPlayer::Late_Update()
 
 void CPlayer::Render(HDC hDC)
 {
-	if (CMainGame::iStageNum == STAGE_ONE)
-	{
 		Draw_Figure(hDC);
-	}
-	else if(CMainGame::iStageNum == STAGE_TWO)
+	if(CMainGame::iStageNum == STAGE_TWO)
 	{
-		Draw_Figure(hDC);
 		Draw_Arrow(hDC, 100.f);
-		m_pBow->Render(hDC);
+		if (m_pBow)
+			m_pBow->Render(hDC);
 	}
 }
 
@@ -120,69 +128,37 @@ void CPlayer::Key_Input()
 	if (CMainGame::iStageNum == STAGE_ONE)
 	{
 		if (GetAsyncKeyState('W'))
-			m_tVel.vY = -m_fSpeed;
-
+		{
+			m_tKeyInputVec.vY -= 1.f;
+		}
 		if (GetAsyncKeyState('S'))
-			m_tVel.vY = m_fSpeed;
-
-		if ((GetAsyncKeyState('D') == (SHORT)0x8000) && !CKeyBoardMgr::m_bLeftPressed)
 		{
-			if (!CKeyBoardMgr::m_bRightPressed)
-			{
-				m_tVel.vX += m_fSpeed;
-				CKeyBoardMgr::m_bRightPressed = true;
-			}
-			else if (CKeyBoardMgr::m_bRightPressed && m_tVel.vX < 0)
-			{
-				m_tVel.vX += m_fSpeed;
-				CKeyBoardMgr::m_bRightPressed = false;
-			}
-		}
-		if ((GetAsyncKeyState('D') == (SHORT)0x0000) && CKeyBoardMgr::m_bRightPressed)
-		{
-			if (m_tInfo.fX == PLAYZONERIGHT - (m_tInfo.fCX * 0.5f));
-			else
-			{
-				if (m_tVel.vX > 0) m_tVel.vX -= m_fSpeed;
-				else if (m_tVel.vX < 0) m_tVel.vX += m_fSpeed;
-			}
-			CKeyBoardMgr::m_bRightPressed = false;
+			m_tKeyInputVec.vY += 1.f;
 		}
 
-		if ((GetAsyncKeyState('A') == (SHORT)0x8000) && !CKeyBoardMgr::m_bRightPressed)
+		if (GetAsyncKeyState('D'))
 		{
-			if (!CKeyBoardMgr::m_bLeftPressed)
-			{
-				m_tVel.vX -= m_fSpeed;
-				CKeyBoardMgr::m_bLeftPressed = true;
-			}
-			else if (CKeyBoardMgr::m_bLeftPressed && m_tVel.vX > 0)
-			{
-				m_tVel.vX -= m_fSpeed;
-				CKeyBoardMgr::m_bLeftPressed = false;
-			}
-		}
-		if ((GetAsyncKeyState('A') == (SHORT)0x0000) && CKeyBoardMgr::m_bLeftPressed)
-		{
-			if (m_tInfo.fX == PLAYZONELEFT + (m_tInfo.fCX * 0.5f));
-			else
-			{
-				if (m_tVel.vX > 0) m_tVel.vX -= m_fSpeed;
-				else if (m_tVel.vX < 0) m_tVel.vX += m_fSpeed;
-			}
-			CKeyBoardMgr::m_bLeftPressed = false;
+			m_tKeyInputVec.vX += 1.f;
 		}
 
-		if (GetAsyncKeyState(VK_SPACE) && m_dwBulletCreTime + 200 < GetTickCount64())
+		if (GetAsyncKeyState('A'))
 		{
-			m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{0.f,-1.f}));
+
+			m_tKeyInputVec.vX -= 1.f;
+		}
+		if (GetAsyncKeyState(VK_LBUTTON) && m_dwBulletCreTime + 200 < GetTickCount64())
+		{
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{0.f,-2.f}));
 			m_dwBulletCreTime = GetTickCount64();
 		}
-		if (GetAsyncKeyState(VK_RBUTTON) && m_dwBulletCreTime + 200 < GetTickCount64())
+		if (GetAsyncKeyState(VK_RBUTTON) && m_dwShieldCreTime + 200 < GetTickCount64())
 		{
 			Create_Shield();
-			m_dwBulletCreTime = GetTickCount64();
+			m_dwShieldCreTime = GetTickCount64();
 		}
+
+		m_tVel = m_tKeyInputVec.Get_DirVec() * m_fSpeed;
+		m_tKeyInputVec = {};
 	}
 	else if(CMainGame::iStageNum == STAGE_TWO)
 	{
@@ -290,10 +266,13 @@ void CPlayer::Key_Input()
 	if (GetAsyncKeyState(VK_SPACE))
 		m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, m_tDirection));
 	}
+
+	m_tVel += m_tKeyInputVec.Get_DirVec()* m_fSpeed;
+	m_tKeyInputVec = {};
 }
 
 void CPlayer::Create_Shield()
 {
-	m_pShieldList->push_back(new CShield(this));
-	m_pShieldList->back()->Init();
+	m_pBulletList->push_back(new CShield(this));
+	m_pBulletList->back()->Init();
 }

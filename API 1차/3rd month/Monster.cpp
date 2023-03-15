@@ -2,8 +2,9 @@
 #include "Monster.h"
 #include "Bullet.h"
 #include "MainGame.h"
+#include "AbstractFactory.h"
 
-CMonster::CMonster() :m_dwInvincibleTime(GetTickCount64()), m_fAngle(0), m_iPattern(0)
+CMonster::CMonster() :m_dwInvincibleTime(GetTickCount64()), m_fAngle(0), m_iPattern(0),m_dwBulletCreTime(GetTickCount64()) ,m_pBulletList(nullptr)
 {
 
 }
@@ -31,6 +32,18 @@ void CMonster::Init()
 		m_bInvincible = true;
 		m_tVel = { m_fSpeed,0.f };
 	}
+	else if (CMainGame::iStageNum == STAGE_THREE)
+	{
+		m_tInfo.fX = WINCX / 2.f;
+		m_tInfo.fY = WINCY / 3.f;
+		m_tInfo.fCX = 100.f;
+		m_tInfo.fCY = 100.f;
+		m_fSpeed = 3.f;
+		m_fAngle = 0;
+		m_tStat.m_fMaxHp = 100;
+		m_tStat.m_fHp = m_tStat.m_fMaxHp;
+		m_tStat.m_fAttack = 10;
+	}
 }
 
 int CMonster::Update()
@@ -43,20 +56,19 @@ int CMonster::Update()
 		m_dwInvincibleTime = GetTickCount64();
 	}
 
-	if (CMainGame::iStageNum == STAGE_ONE)
+	if (m_dwBulletCreTime + (rand() % 2000) + 500 < GetTickCount64())
+	{
+		Random_Shooting();
+	}
+
+	if (CMainGame::iStageNum == STAGE_TWO)
+	{
+		
+	}
+	else
 	{
 		if (PLAYZONEBOTTOM + m_tInfo.fCY * 0.5f <= m_tInfo.fY || PLAYZONELEFT - 50 >= m_tInfo.fX - m_tInfo.fCX * 0.5f || PLAYZONERIGHT <= m_tInfo.fX - m_tInfo.fCX * 0.5f)
 			m_bDead = true;
-	}
-	else if (CMainGame::iStageNum == STAGE_TWO)
-	{
-		// 积己 饶 1檬悼救 公利
-		if (m_dwInvincibleTime + 1000 < GetTickCount64())
-		{
-			m_bInvincible = false;
-
-			m_dwInvincibleTime = GetTickCount64();
-		}
 	}
 
 	if (Is_Dead())
@@ -156,10 +168,15 @@ void CMonster::Move(int _iPattern)
 	}
 }
 
-void CMonster::Turn()
+void CMonster::Random_Shooting()
 {
-	if (m_tInfo.fX - (m_tInfo.fCX / 2) < PLAYZONELEFT)
-		m_tVel.vX *= -1;
-	else if (m_tInfo.fX + (m_tInfo.fCX / 2) > PLAYZONERIGHT)
-		m_tVel.vX *= -1;
+	for (int i = 0; i < rand() % 3 + 2; ++i)
+	{
+		Vec2 vTemp{ (float)(rand() % 7) - 3 , (float)(rand() % 4) + 1 };
+		if (vTemp.vX == 0)
+			++vTemp.vX;
+		m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, vTemp.Get_DirVec()));
+	}
+	m_dwBulletCreTime = GetTickCount64();
+
 }
