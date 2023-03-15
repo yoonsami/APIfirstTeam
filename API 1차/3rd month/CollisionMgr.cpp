@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CollisionMgr.h"
+#include "Arrow.h"
 
 BOOL CCollisionMgr::IntersectCirRect(RECT* circle, RECT* rect)
 {
@@ -29,13 +30,24 @@ BOOL CCollisionMgr::IntersectWith(RECT& rectA, RECT& rectB, FIGURETYPE figureA, 
 			return IntersectRect(&tmp, &rectA, &rectB);
 		if (figureB == FIGURETYPE::FT_CIRCLE)
 			return IntersectCirRect(&rectB, &rectA);
+		if (figureB == FIGURETYPE::FT_ARROW)
+			return IntersectRectDot(&rectA, (rectB.right + rectB.left) * 0.5f, (rectB.bottom + rectB.top) * 0.5f);
 	}
-	if (figureA == FIGURETYPE::FT_CIRCLE)
+	else if (figureA == FIGURETYPE::FT_CIRCLE)
 	{
 		if (figureB == FIGURETYPE::FT_RECT)
 			return IntersectCirRect(&rectA, &rectB);
 		if (figureB == FIGURETYPE::FT_CIRCLE)
 			return IntersectCircle(&rectA, &rectB);
+		if (figureB == FIGURETYPE::FT_ARROW)
+			return IntersectCirDot(&rectA, (rectB.right + rectB.left) * 0.5f, (rectB.bottom + rectB.top) * 0.5f);
+	}
+	else if (figureA == FIGURETYPE::FT_ARROW)
+	{
+		if (figureB == FIGURETYPE::FT_RECT)
+			return IntersectRectDot(&rectB, (rectA.right + rectA.left) * 0.5f, (rectA.bottom + rectA.top) * 0.5f);
+		if (figureB == FIGURETYPE::FT_CIRCLE)
+			return IntersectCirDot(&rectB, (rectA.right + rectA.left) * 0.5f, (rectA.bottom + rectA.top) * 0.5f);
 	}
 
 	return false;
@@ -51,9 +63,21 @@ void CCollisionMgr::CheckCollide(list<CObject*> _Dst, list<CObject*> _Src)
 			{
 				if (IntersectWith(i->Get_Rect(), j->Get_Rect(), i->Get_Figure(), j->Get_Figure()))
 				{
-					// 피격판정 TODO
-					i->On_Attacked(j);
-					j->On_Attacked(i);
+					if(i->Get_Stat().m_fHp>0 && j->Get_Stat().m_fHp > 0)
+					{
+						i->On_Attacked(j);
+						j->On_Attacked(i);
+
+						if (i->Get_Figure() == FIGURETYPE::FT_ARROW)
+						{
+							j->Hit_By_Arrow(dynamic_cast<CArrow*>(i));
+						}
+						else if (j->Get_Figure() == FIGURETYPE::FT_ARROW)
+						{
+							i->Hit_By_Arrow(dynamic_cast<CArrow*>(j));
+						}
+					}
+
 				}
 			}
 		}

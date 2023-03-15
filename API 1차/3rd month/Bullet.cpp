@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "Bullet.h"
 
-CBullet::CBullet() :m_fArrowSize(ARROWSIZE)
+CBullet::CBullet()
 {
-	ZeroMemory(&m_tArrowTail, sizeof(Vec2));
-	ZeroMemory(&m_tArrowHead, sizeof(Vec2));
+	m_tDirection = { 0.f,-1.f };
 }
 
 CBullet::~CBullet()
@@ -15,9 +14,9 @@ CBullet::~CBullet()
 void CBullet::Init()
 {
 	m_tInfo.fCX = 10.f;
-	m_tInfo.fCY = 20.f;
-	m_fSpeed = 2.f;
-
+	m_tInfo.fCY = 10.f;
+	m_fSpeed = 5.f;
+	
 	m_eFigure = FIGURETYPE::FT_CIRCLE;
 }
 
@@ -38,18 +37,12 @@ void CBullet::Late_Update()
 {
 	if (m_tRect.left	<= PLAYZONELEFT		|| m_tRect.top		<= PLAYZONETOP ||
 		m_tRect.right	>= PLAYZONERIGHT	|| m_tRect.bottom	>= PLAYZONEBOTTOM)
-		m_bDead = true;
+		m_tStat.m_fHp = 0;
 }
 
 void CBullet::Render(HDC hDC)
 {
-	if (m_eFigure == FIGURETYPE::FT_ARROW)
-	{
-		
-	}
-	else
 		Draw_Figure(hDC);
-	
 }
 
 void CBullet::Release()

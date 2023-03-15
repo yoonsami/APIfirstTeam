@@ -24,7 +24,21 @@ public:
 		CObject* pObj = new T;
 		pObj->Init();
 		pObj->Set_Pos(_fX, _fY);
-		pObj->Set_Velocity(_Dir);
+		pObj->Set_DirVec(_Dir);
+		return pObj;
+	}
+
+	static CObject* Create(float _fX, float _fY, float _fCX, float _fCY, Vec2 _dir, float _ratio, FLOAT Mode)
+	{
+		CObject* pObj = new T;
+		pObj->Init();
+		pObj->Set_Pos(_fX, _fY);
+		pObj->Set_Size(_fCX * _ratio, _fCY * _ratio);
+		pObj->Set_VelX(_dir.vX * Mode);
+		pObj->Set_VelY(_dir.vY);
+		pObj->Get_Stat().m_fMaxHp *= _ratio;
+		pObj->Get_Stat().m_fHp *= _ratio;
+
 		return pObj;
 	}
 };

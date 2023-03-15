@@ -10,5 +10,6 @@ public:
 	static BOOL			m_bZPressed;
 	static BOOL			m_bXPressed;
 	static BOOL			m_bLButtonPressed;
+	static BOOL			m_bRButtonPressed;
 };
 

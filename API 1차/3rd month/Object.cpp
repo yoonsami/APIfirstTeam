@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Object.h"
 #include "MainGame.h"
+#include "Arrow.h"
 
 CObject::CObject() : m_fSpeed(0.f), m_bDead(false), m_bInvincible(false), m_bOnGround(false),m_eFigure(FIGURETYPE::FT_RECT),m_tDirection{}, m_fAimRadian(0.f), m_tStat{ 10.f,10.f,10.f}
 {
@@ -17,10 +18,22 @@ CObject::~CObject()
 
 void CObject::Update_Rect(void)
 {
-	m_tRect.left = static_cast<LONG>(m_tInfo.fX - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
-	m_tRect.top = static_cast<LONG>(m_tInfo.fY - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
-	m_tRect.right = static_cast<LONG>(m_tInfo.fX + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
-	m_tRect.bottom = static_cast<LONG>(m_tInfo.fY + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
+	if(CMainGame::iStageNum != STAGE_THREE)
+	{
+		m_tRect.left = static_cast<LONG>(m_tInfo.fX - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
+		m_tRect.top = static_cast<LONG>(m_tInfo.fY - (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
+		m_tRect.right = static_cast<LONG>(m_tInfo.fX + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCX * 0.5f));
+		m_tRect.bottom = static_cast<LONG>(m_tInfo.fY + (0.5 + 0.5 * (m_tStat.m_fHp / m_tStat.m_fMaxHp)) * (m_tInfo.fCY * 0.5f));
+	}
+	else
+	{
+		m_tRect.left = static_cast<LONG>(m_tInfo.fX - (m_tInfo.fCX * 0.5f));
+		m_tRect.top = static_cast<LONG>(m_tInfo.fY -  (m_tInfo.fCY * 0.5f));
+		m_tRect.right = static_cast<LONG>(m_tInfo.fX + (m_tInfo.fCX * 0.5f));
+		m_tRect.bottom = static_cast<LONG>(m_tInfo.fY + (m_tInfo.fCY * 0.5f));
+
+	}
+
 }
 
 void CObject::Set_Pos(float _fX, float _fY)
@@ -44,8 +57,8 @@ void CObject::Draw_Figure(HDC hDC)
 
 void CObject::Accelerated()
 {
-	if (CMainGame::iStageNum == STAGE_TWO)
-		CMainGame::Gravity = 1.f;
+	if (CMainGame::iStageNum == STAGE_THREE)
+		CMainGame::Gravity = GRAVITY;
 	else 
 	{
 		CMainGame::Gravity = 0.f;
@@ -124,4 +137,15 @@ void CObject::On_Attacked(CObject* _Attacker)
 	m_tStat.m_fHp -= _Attacker->Get_Stat().m_fAttack;
 	if (m_tStat.m_fHp < 0)
 		m_tStat.m_fHp = 0;
+}
+
+void CObject::Hit_By_Arrow(CArrow* Arrow)
+{
+	m_tHitArrow.push_back(Arrow->Get_HeadTailPos());
+}
+
+void CObject::Set_Size(float _fCX, float _fCY)
+{
+	m_tInfo.fCX = _fCX;
+	m_tInfo.fCY = _fCY;
 }

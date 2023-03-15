@@ -52,6 +52,21 @@
     <Filter Include="01.Object\05.Bow">
       <UniqueIdentifier>{e59b0e4e-fe63-423c-8381-f774cc5854cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\00.Player\00.Player_Yoonseong">
+      <UniqueIdentifier>{e33c9e08-2996-41a6-96d0-39bd32ce4bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet\00.Arrow">
+      <UniqueIdentifier>{d7a03022-31d4-46e1-a5bc-a83fb28b8b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet\01.GuidedBullet">
+      <UniqueIdentifier>{f7995332-a550-477e-a2bb-19b61ca883af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet\00.Arrow\00.ExtremArrow">
+      <UniqueIdentifier>{f1a50713-ab41-4645-ba4c-65deaa759df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet\02.RotationBullet">
+      <UniqueIdentifier>{cf79e7fe-3e87-43a5-965f-bd3b968a56c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,6 +132,21 @@
     <ClInclude Include="Bow.h">
       <Filter>01.Object\05.Bow</Filter>
     </ClInclude>
+    <ClInclude Include="Player_Yoonseong.h">
+      <Filter>01.Object\00.Player\00.Player_Yoonseong</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
+      <Filter>01.Object\01.Bullet\00.Arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedBullet.h">
+      <Filter>01.Object\01.Bullet\01.GuidedBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtremeArrow.h">
+      <Filter>01.Object\01.Bullet\00.Arrow\00.ExtremArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationBullet.h">
+      <Filter>01.Object\01.Bullet\02.RotationBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rd month.cpp">
@@ -154,6 +184,21 @@
     </ClCompile>
     <ClCompile Include="Bow.cpp">
       <Filter>01.Object\05.Bow</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Yoonseong.cpp">
+      <Filter>01.Object\00.Player\00.Player_Yoonseong</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
+      <Filter>01.Object\01.Bullet\00.Arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedBullet.cpp">
+      <Filter>01.Object\01.Bullet\01.GuidedBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtremeArrow.cpp">
+      <Filter>01.Object\01.Bullet\00.Arrow\00.ExtremArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationBullet.cpp">
+      <Filter>01.Object\01.Bullet\02.RotationBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

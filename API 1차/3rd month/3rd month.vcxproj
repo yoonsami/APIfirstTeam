@@ -90,6 +90,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,6 +107,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -122,6 +124,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,6 +141,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,13 +153,16 @@
   <ItemGroup>
     <ClInclude Include="3rd month.h" />
     <ClInclude Include="AbstractFactory.h" />
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="Bow.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="ExtremeArrow.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Functor.h" />
+    <ClInclude Include="GuidedBullet.h" />
     <ClInclude Include="Include.h" />
     <ClInclude Include="KeyBoardMgr.h" />
     <ClInclude Include="MainGame.h" />
@@ -164,16 +171,21 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Player_Yoonseong.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RotationBullet.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3rd month.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Bow.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="ExtremeArrow.cpp" />
+    <ClCompile Include="GuidedBullet.cpp" />
     <ClCompile Include="KeyBoardMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -186,6 +198,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player_Yoonseong.cpp" />
+    <ClCompile Include="RotationBullet.cpp" />
     <ClCompile Include="Shield.cpp" />
   </ItemGroup>
   <ItemGroup>

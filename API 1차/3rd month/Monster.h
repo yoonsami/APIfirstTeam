@@ -12,20 +12,24 @@ public:
 	virtual void		Late_Update() override;
 	virtual void		Render(HDC hDC) override;
 	virtual void		Release() override;
+	virtual void		Accelerated() override;
 
 public:
-	void			Set_Pattern(int _Pattern) { m_iPattern = _Pattern; }
 	void			Set_Bullet(list<CObject*>* _bulletList) { m_pBulletList = _bulletList; }
+	INT				Get_Pattern() { return m_iPattern; }
+	void			Set_Target(INFO _tTarget) { m_tTarget = _tTarget; }
+	void			Update_Hit_ArrowPos(FLOAT A);
 
 private:
-	void Move(int _iPattern);
+	void Move();
 	void Random_Shooting();
 
 private:
 	DWORD64			m_dwInvincibleTime;
 	DWORD64			m_dwBulletCreTime;
-	FLOAT			m_fAngle;
 	INT				m_iPattern;
 	list<CObject*>* m_pBulletList;
+	FLOAT			m_fRadius;
+	INFO			m_tTarget;
 };
 

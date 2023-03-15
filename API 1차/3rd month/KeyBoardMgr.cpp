@@ -17,3 +17,5 @@ BOOL CKeyBoardMgr::m_bXPressed = false;
 
 BOOL CKeyBoardMgr::m_bLButtonPressed = false;
 
+BOOL CKeyBoardMgr::m_bRButtonPressed = false;
+

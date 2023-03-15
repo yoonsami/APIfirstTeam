@@ -17,9 +17,6 @@ public:
 public:
 	void Set_Dead() { m_bDead = true; }
 
-private:
-	Vec2			m_tArrowTail;
-	Vec2			m_tArrowHead;
-	FLOAT			m_fArrowSize;
+
 };
 

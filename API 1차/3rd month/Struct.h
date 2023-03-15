@@ -38,3 +38,9 @@ struct STAT
 	FLOAT m_fHp;
 	FLOAT Get_HpRatio() { if (m_fMaxHp > 0) return m_fHp / m_fMaxHp; else return 0; }
 };
+
+struct ARROWPOINT
+{
+	Vec2 Head;
+	Vec2 Tail;
+};
