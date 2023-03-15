@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00.MainGame">
+      <UniqueIdentifier>{45f8247c-4e7e-4332-980a-e412ee9026d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.header">
+      <UniqueIdentifier>{06990f78-95b6-40f9-a83a-12ea9cb54826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object">
+      <UniqueIdentifier>{a48318bd-79ab-49b0-87ab-20b48f2bd7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\00.Player">
+      <UniqueIdentifier>{30ff9a15-d1fd-42f6-8df2-c69296c4147b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet">
+      <UniqueIdentifier>{cd63bd72-c621-4602-976d-4a303bc42184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\02.Monstser">
+      <UniqueIdentifier>{f22b04d7-5aa2-4978-a020-95b177e0ec2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Design">
+      <UniqueIdentifier>{4291b0dc-5d2a-41d8-89e4-60d798a058ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Design\00.AbstractFactory">
+      <UniqueIdentifier>{0e1cd61a-079e-4518-93be-da089669f073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Design\01.CollisionMgr">
+      <UniqueIdentifier>{0f59a670-4fc5-4bce-a746-3a115a11b5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\03.Mouse">
+      <UniqueIdentifier>{71fdd21f-4efa-4c52-bcc7-9941e81065ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Design\02.KeyBoardMgr">
+      <UniqueIdentifier>{0a4a82ed-df4d-4703-b8d6-5428d0037fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\04.Shield">
+      <UniqueIdentifier>{deb15e4e-dc0d-4189-aae6-bab0e413a8db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\05.Bow">
+      <UniqueIdentifier>{e59b0e4e-fe63-423c-8381-f774cc5854cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd month.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>99.header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>01.Object\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>01.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>01.Object\01.Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>01.Object\02.Monstser</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>99.header</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>99.header</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>99.header</Filter>
+    </ClInclude>
+    <ClInclude Include="Functor.h">
+      <Filter>99.header</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>02.Design\00.AbstractFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>02.Design\01.CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>01.Object\03.Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyBoardMgr.h">
+      <Filter>02.Design\02.KeyBoardMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>01.Object\04.Shield</Filter>
+    </ClInclude>
+    <ClInclude Include="Bow.h">
+      <Filter>01.Object\05.Bow</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="3rd month.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>01.Object\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>01.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>01.Object\01.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>01.Object\02.Monstser</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>02.Design\01.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>01.Object\03.Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyBoardMgr.cpp">
+      <Filter>02.Design\02.KeyBoardMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>01.Object\04.Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="Bow.cpp">
+      <Filter>01.Object\05.Bow</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3rd month.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="3rd month.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

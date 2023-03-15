@@ -1,0 +1,48 @@
+#pragma once
+
+
+enum class DIRECTION
+{
+	DIR_LEFT,
+	DIR_UP,
+	DIR_RIGHT,
+	DIR_DOWN,
+	DIR_LU,
+	DIR_RU,
+	DIR_END
+};
+
+enum ObjectType
+{
+	OT_PLAYER,
+	OT_MONSTER,
+	OT_BULLET,
+	OT_MOUSE,
+	OT_SHIELD,
+	OT_MONSTERBULLET,
+	OT_END
+};
+
+enum class FIGURETYPE
+{
+	FT_RECT,
+	FT_CIRCLE,
+	FT_ARROW
+};
+
+enum STAGENUM
+{
+	STAGE_ONE,
+	STAGE_TWO,
+	STAGE_THREE
+};
+
+enum MONSTER_PATTERN
+{
+	STRAIGHT,
+	LEFT_ANGLE,
+	RIGHT_ANGLE,
+	LEFT_CIRCLE,
+	RIGHT_CIRCLE,
+	TRACE
+};
