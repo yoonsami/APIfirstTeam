@@ -4,6 +4,7 @@
 class CMouse : public CObject
 {
 public:
+	CMouse();
 	virtual ~CMouse();
 public:
 	void	Init() override;

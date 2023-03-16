@@ -3,9 +3,11 @@
 #include "Bullet.h"
 #include "MainGame.h"
 #include "AbstractFactory.h"
+#include "Shield.h"
 
 CMonster::CMonster() 
-	:m_dwInvincibleTime(GetTickCount64()), 
+	: CObject(OT_MONSTER),
+	m_dwInvincibleTime(GetTickCount64()), 
 	m_dwBulletCreTime(GetTickCount64()),
 	m_pBulletList(nullptr),
 	m_fRadius(0.f),
@@ -22,37 +24,42 @@ CMonster::~CMonster()
 
 void CMonster::Init()
 {
-	
-	m_tInfo = { ((rand() % 541) + 180.f) , 20, 60.f, 60.f };
 	m_fSpeed = 3.f;
 	m_eFigure = FIGURETYPE::FT_CIRCLE;
-	m_bInvincible = false;
+	m_bInvincible = true;
 	m_tVel = { 0.f, m_fSpeed };
-
-
 	m_tStat.m_fMaxHp = 100;
 	m_tStat.m_fHp = m_tStat.m_fMaxHp;
 	m_tStat.m_fAttack = 10;
-
 	if (CMainGame::iStageNum == STAGE_ONE)
+	{
+		m_tInfo = { ((rand() % 541) + 180.f) , 20, 60.f, 60.f };
 		m_iPattern = rand() % PATTERN_END;
+	}
+	else if (CMainGame::iStageNum == STAGE_TWO)
+	{
+		m_tInfo = { WINCX *0.5f, WINCY / 3.f , 100.f, 100.f };
+		m_tVel = { m_fSpeed, 0.f };
+	}
 	else if (CMainGame::iStageNum == STAGE_THREE)
 	{
 		m_tInfo = { ((rand() % 541) + 180.f) , 200, 60.f, 60.f };
-		m_iPattern = Yoon_Pattern;
 		m_tVel = { 2.f, 0.f };
 	}
 }
 
 int CMonster::Update()
 {
-	// 积己 饶 1檬悼救 公利
-	if (m_dwInvincibleTime + 1000 < GetTickCount64())
+	// 积己 饶 0.3檬悼救 公利
+	if (m_dwInvincibleTime + 300 < GetTickCount64())
 	{
 		m_bInvincible = false;
 
 		m_dwInvincibleTime = GetTickCount64();
 	}
+
+	if (Is_Dead())
+		return OBJ_DEAD;
 
 	if (m_iPattern == TRACE)
 	{
@@ -62,19 +69,10 @@ int CMonster::Update()
 		m_tVel.vY = sinf(m_fAimRadian);
 	}
 
-	if (m_dwBulletCreTime + (rand() % 2000) + 2000 < GetTickCount64())
-	{
-		Random_Shooting();
-	}
-
-	if (PLAYZONEBOTTOM + m_tInfo.fCY * 0.5f <= m_tInfo.fY || PLAYZONELEFT - 50 >= m_tInfo.fX - m_tInfo.fCX * 0.5f || PLAYZONERIGHT <= m_tInfo.fX - m_tInfo.fCX * 0.5f)
-		m_tStat.m_fHp = 0;
-
-
-	if (Is_Dead())
-		return OBJ_DEAD;
-
 	Move();
+	Acting();
+
+
 
 	__super::Update_Rect();
 	return OBJ_NOEVENT;;
@@ -82,7 +80,8 @@ int CMonster::Update()
 
 void CMonster::Late_Update()
 {
-	
+	if (PLAYZONEBOTTOM + m_tInfo.fCY * 0.5f <= m_tInfo.fY || PLAYZONELEFT - 50 >= m_tInfo.fX - m_tInfo.fCX * 0.5f || PLAYZONERIGHT <= m_tInfo.fX - m_tInfo.fCX * 0.5f)
+		m_tStat.m_fHp = 0;
 }
 
 void CMonster::Render(HDC hDC)
@@ -218,83 +217,145 @@ void CMonster::Update_Hit_ArrowPos(FLOAT A)
 
 void CMonster::Move()
 {
-	if (STRAIGHT == m_iPattern)
+	if(CMainGame::iStageNum == STAGE_ONE)
 	{
-		m_tInfo.fX += m_tVel.vX;
-		m_tInfo.fY += m_tVel.vY;
-	}
-	else if (LEFT_ANGLE == m_iPattern)
-	{
-		if (300 >= m_tInfo.fY)
-			m_tInfo.fY += m_tVel.vY;
-		else if (300 < m_tInfo.fY)
+		if (STRAIGHT == m_iPattern)
 		{
-			m_tVel.vX = -m_fSpeed;
-			m_tVel.vY = 0.f;
 			m_tInfo.fX += m_tVel.vX;
-		}
-	}
-	else if (RIGHT_ANGLE == m_iPattern)
-	{
-		if (300 >= m_tInfo.fY)
 			m_tInfo.fY += m_tVel.vY;
-		else if (300 < m_tInfo.fY)
+		}
+		else if (LEFT_ANGLE == m_iPattern)
 		{
+			if (300 >= m_tInfo.fY)
+				m_tInfo.fY += m_tVel.vY;
+			else if (300 < m_tInfo.fY)
+			{
+				m_tVel.vX = -m_fSpeed;
+				m_tVel.vY = 0.f;
+				m_tInfo.fX += m_tVel.vX;
+			}
+		}
+		else if (RIGHT_ANGLE == m_iPattern)
+		{
+			if (300 >= m_tInfo.fY)
+				m_tInfo.fY += m_tVel.vY;
+			else if (300 < m_tInfo.fY)
+			{
 
-			m_tVel.vX = m_fSpeed;
-			m_tVel.vY = 0.f;
-			m_tInfo.fX += m_tVel.vX;
+				m_tVel.vX = m_fSpeed;
+				m_tVel.vY = 0.f;
+				m_tInfo.fX += m_tVel.vX;
+			}
 		}
-	}
-	else if (LEFT_CIRCLE == m_iPattern)
-	{
-		if (150 >= m_tInfo.fY && 0 == m_fAimRadian)
-			m_tInfo.fY += m_tVel.vY;
-		else if (150 < m_tInfo.fY)
+		else if (LEFT_CIRCLE == m_iPattern)
 		{
-			--m_fAimRadian;
-			float fRadian = m_fAimRadian * (PI / 180.f);
-			m_tVel.vX = -1.1f * (float)cos(fRadian);
-			m_tVel.vY = -1.1f * (float)sin(fRadian);
-			m_tInfo.fX += m_tVel.vX;
-			m_tInfo.fY += m_tVel.vY;
+			if (150 >= m_tInfo.fY && 0 == m_fAimRadian)
+				m_tInfo.fY += m_tVel.vY;
+			else if (150 < m_tInfo.fY)
+			{
+				--m_fAimRadian;
+				float fRadian = m_fAimRadian * (PI / 180.f);
+				m_tVel.vX = -1.1f * (float)cos(fRadian);
+				m_tVel.vY = -1.1f * (float)sin(fRadian);
+				m_tInfo.fX += m_tVel.vX;
+				m_tInfo.fY += m_tVel.vY;
+			}
 		}
-	}
-	else if (RIGHT_CIRCLE == m_iPattern)
-	{
-		if (150 >= m_tInfo.fY && 0 == m_fAimRadian)
-			m_tInfo.fY += m_tVel.vY;
-		else if (150 < m_tInfo.fY)
+		else if (RIGHT_CIRCLE == m_iPattern)
 		{
-			++m_fAimRadian;
-			float fRadian = m_fAimRadian * (PI / 180.f);
-			m_tVel.vX = 1.1f * (float)cos(fRadian);
-			m_tVel.vY = 1.1f * (float)sin(fRadian);
+			if (150 >= m_tInfo.fY && 0 == m_fAimRadian)
+				m_tInfo.fY += m_tVel.vY;
+			else if (150 < m_tInfo.fY)
+			{
+				++m_fAimRadian;
+				float fRadian = m_fAimRadian * (PI / 180.f);
+				m_tVel.vX = 1.1f * (float)cos(fRadian);
+				m_tVel.vY = 1.1f * (float)sin(fRadian);
 
+				m_tInfo.fX += m_tVel.vX;
+				m_tInfo.fY += m_tVel.vY;
+			}
+		}
+		else if (TRACE == m_iPattern)
+		{
 			m_tInfo.fX += m_tVel.vX;
 			m_tInfo.fY += m_tVel.vY;
 		}
 	}
-	else if (TRACE == m_iPattern)
+	else if (CMainGame::iStageNum == STAGE_TWO)
 	{
-		m_tInfo.fX += m_tVel.vX;
-		m_tInfo.fY += m_tVel.vY;
+		m_tInfo += m_tVel * m_fSpeed;
 	}
-	else if (m_iPattern == Yoon_Pattern)
-	{
+	else if(CMainGame::iStageNum == STAGE_THREE)
 		Accelerated();
+}
+
+void CMonster::Acting()
+{
+	if (CMainGame::iStageNum == STAGE_ONE)
+	{
+		
+			Random_Shooting();
+	}
+	else if (CMainGame::iStageNum == STAGE_TWO)
+	{
+		switch (m_iMonsterType)
+		{
+		case MON_MONSTER:
+			if (m_dwBulletCreTime + 1000 < GetTickCount64())
+			{
+				m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{ 0.f, 1.f }));
+				m_dwBulletCreTime = GetTickCount64();
+			}
+			break;
+		case MON_RANDOMBULLET:
+			if (m_dwBulletCreTime + (rand() % 2000) + 500 < GetTickCount64())
+			{
+				Random_Shooting();
+			}
+			break;
+		case MON_SHEILD:
+			if (m_dwBulletCreTime + 1000 < GetTickCount64())
+			{
+				Create_Shield();
+				m_dwBulletCreTime = GetTickCount64();
+			}
+			break;
+		case MON_SCREWBULLET:
+			break;
+		case MON_BOSS:
+			break;
+		case MON_END:
+			break;
+		default:
+			break;
+		}
+	}
+	else if (CMainGame::iStageNum == STAGE_THREE)
+	{
+			Random_Shooting();
 	}
 }
 
 void CMonster::Random_Shooting()
 {
-	for (int i = 0; i < rand() % 3 + 2; ++i)
+	if (m_dwBulletCreTime + (rand() % 2000) + 2000 < GetTickCount64())
 	{
-		Vec2 vTemp{ (float)(rand() % 7) - 3 , (float)(rand() % 4) + 1 };
-		if (vTemp.vX == 0)
-			++vTemp.vX;
-		m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, vTemp.Get_DirVec()));
+		for (int i = 0; i < rand() % 3 + 2; ++i)
+		{
+			Vec2 vTemp{ (float)(rand() % 7) - 3 , (float)(rand() % 4) + 1 };
+			if (vTemp.vX == 0)
+				++vTemp.vX;
+			m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, vTemp.Get_DirVec()));
+		}
+		m_dwBulletCreTime = GetTickCount64();
 	}
-	m_dwBulletCreTime = GetTickCount64();
 
+}
+
+
+void CMonster::Create_Shield()
+{
+	m_pBulletList->push_back(new CShield(this));
+	m_pBulletList->back()->Init();
 }

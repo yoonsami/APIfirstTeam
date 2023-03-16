@@ -41,6 +41,7 @@ private:
 	list<CObject*>	m_objList[OT_END];
 	DWORD64			m_dwFPSTime;
 	DWORD64			m_dwMonsterCreTime;
+	DWORD64			m_dwBLOCKCreTime;
 	INT				m_iFPS;
 	TCHAR			m_szFPS[32];
 	TCHAR			m_szScore[32];

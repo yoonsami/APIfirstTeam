@@ -59,27 +59,30 @@ void CCollisionMgr::CheckCollide(list<CObject*> _Dst, list<CObject*> _Src)
 	{
 		for (auto& j : _Src)
 		{
-			if(!i->Is_Invincible() && !j->Is_Invincible())
+			if (IntersectWith(i->Get_Rect(), j->Get_Rect(), i->Get_Figure(), j->Get_Figure()))
 			{
-				if (IntersectWith(i->Get_Rect(), j->Get_Rect(), i->Get_Figure(), j->Get_Figure()))
+				if (i->Get_Stat().m_fHp > 0 && j->Get_Stat().m_fHp > 0)
 				{
-					if(i->Get_Stat().m_fHp>0 && j->Get_Stat().m_fHp > 0)
-					{
+					if (i->Get_ObjectType() == OT_BULLET)
+						i->Set_Dead();
+					
+					if(!i->Is_Invincible())
 						i->On_Attacked(j);
+					if (!j->Is_Invincible())
 						j->On_Attacked(i);
 
-						if (i->Get_Figure() == FIGURETYPE::FT_ARROW)
-						{
-							j->Hit_By_Arrow(dynamic_cast<CArrow*>(i));
-						}
-						else if (j->Get_Figure() == FIGURETYPE::FT_ARROW)
-						{
-							i->Hit_By_Arrow(dynamic_cast<CArrow*>(j));
-						}
+					if (i->Get_Figure() == FIGURETYPE::FT_ARROW)
+					{
+						j->Hit_By_Arrow(dynamic_cast<CArrow*>(i));
 					}
-
+					else if (j->Get_Figure() == FIGURETYPE::FT_ARROW)
+					{
+						i->Hit_By_Arrow(dynamic_cast<CArrow*>(j));
+					}
 				}
+
 			}
+
 		}
 	}
 }

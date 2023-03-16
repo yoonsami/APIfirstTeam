@@ -15,9 +15,7 @@ public:
 	virtual void		Key_Input() override;
 
 public:
-	void Set_Bullet(list<CObject*>* _bulletList) { m_pBulletList = _bulletList; }
-	void Set_Shield(list<CObject*>* _shieldList) { m_pShieldList = _shieldList; }
-	void Draw_Arrow(HDC hDC, FLOAT _size);
+	void Set_Bullet(list<CObject*>* _bulletList) { m_pBulletList = _bulletList; }	void Draw_Arrow(HDC hDC, FLOAT _size);
 	Vec2& Get_ArrowTail() { return m_tArrowTail; }
 	void Set_AimPos();
 private:

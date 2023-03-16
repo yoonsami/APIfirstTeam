@@ -1,10 +1,10 @@
 #pragma once
-#include "Object.h"
+#include "Bullet.h"
 
-class CShield : public CObject
+class CShield : public CBullet
 {
 public:
-	CShield(CObject* pOwner) : m_pOwner(pOwner) {};
+	CShield(CObject* pOwner);
 	virtual ~CShield();
 
 public:

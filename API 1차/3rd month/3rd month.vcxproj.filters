@@ -46,9 +46,6 @@
     <Filter Include="02.Design\02.KeyBoardMgr">
       <UniqueIdentifier>{0a4a82ed-df4d-4703-b8d6-5428d0037fa5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Object\04.Shield">
-      <UniqueIdentifier>{deb15e4e-dc0d-4189-aae6-bab0e413a8db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Object\05.Bow">
       <UniqueIdentifier>{e59b0e4e-fe63-423c-8381-f774cc5854cf}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,15 @@
     </Filter>
     <Filter Include="01.Object\01.Bullet\03.SpiralBullet">
       <UniqueIdentifier>{40de1a64-16c3-457e-be19-f2fe0a013660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\02.Monstser\00.Boss">
+      <UniqueIdentifier>{c912ad41-7e14-4d3c-8eef-026a4083672d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\06.Block">
+      <UniqueIdentifier>{55e1fbe4-7ed4-4c14-8672-b4023d91aba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\01.Bullet\04.Shield">
+      <UniqueIdentifier>{deb15e4e-dc0d-4189-aae6-bab0e413a8db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +135,6 @@
     <ClInclude Include="KeyBoardMgr.h">
       <Filter>02.Design\02.KeyBoardMgr</Filter>
     </ClInclude>
-    <ClInclude Include="Shield.h">
-      <Filter>01.Object\04.Shield</Filter>
-    </ClInclude>
     <ClInclude Include="Bow.h">
       <Filter>01.Object\05.Bow</Filter>
     </ClInclude>
@@ -152,6 +155,15 @@
     </ClInclude>
     <ClInclude Include="SpiralBullet.h">
       <Filter>01.Object\01.Bullet\03.SpiralBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>01.Object\02.Monstser\00.Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>01.Object\06.Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>01.Object\01.Bullet\04.Shield</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +197,6 @@
     <ClCompile Include="KeyBoardMgr.cpp">
       <Filter>02.Design\02.KeyBoardMgr</Filter>
     </ClCompile>
-    <ClCompile Include="Shield.cpp">
-      <Filter>01.Object\04.Shield</Filter>
-    </ClCompile>
     <ClCompile Include="Bow.cpp">
       <Filter>01.Object\05.Bow</Filter>
     </ClCompile>
@@ -208,6 +217,15 @@
     </ClCompile>
     <ClCompile Include="SpiralBullet.cpp">
       <Filter>01.Object\01.Bullet\03.SpiralBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>01.Object\02.Monstser\00.Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>01.Object\06.Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>01.Object\01.Bullet\04.Shield</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

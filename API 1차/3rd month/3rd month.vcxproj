@@ -154,6 +154,8 @@
     <ClInclude Include="3rd month.h" />
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bow.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -182,6 +184,8 @@
   <ItemGroup>
     <ClCompile Include="3rd month.cpp" />
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bow.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />

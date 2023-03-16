@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Mouse.h"
 
+CMouse::CMouse() :CObject(OT_MOUSE)
+{
+
+}
+
 CMouse::~CMouse()
 {
 	Release();

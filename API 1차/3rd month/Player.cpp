@@ -9,8 +9,7 @@
 #include "GuidedBullet.h"
 #include "RotationBullet.h"
 
-CPlayer::CPlayer() : m_pBulletList(nullptr),
-m_pShieldList(nullptr),
+CPlayer::CPlayer() :CObject(OT_PLAYER) ,m_pBulletList(nullptr),
 m_dwBulletCreTime(GetTickCount64()),
 m_dwShieldCreTime(GetTickCount64()),
 m_tKeyInputVec{}
@@ -94,25 +93,25 @@ void CPlayer::Key_Input()
 
 		m_tKeyInputVec.vX -= 1.f;
 	}
-	if (GetAsyncKeyState('Z') && m_dwBulletCreTime + 200 < GetTickCount64())
+	if (GetAsyncKeyState(VK_LBUTTON) && m_dwBulletCreTime + 200 < GetTickCount64())
 	{
 		// ±×³É bullet
 		m_pBulletList->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{ 0.f,-1.f }));
 		m_dwBulletCreTime = GetTickCount64();
 	}
-	if (GetAsyncKeyState('X') && m_dwBulletCreTime + 200 < GetTickCount64())
+	if (GetAsyncKeyState(VK_RBUTTON) && m_dwBulletCreTime + 200 < GetTickCount64())
 	{
 		// À¯µµÅº
 		m_pGuidedBulletList->push_back(CAbstractFactory<CGuidedBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{ 0.f,-1.f }));
 		m_dwBulletCreTime = GetTickCount64();
 	}
-	if (GetAsyncKeyState('C') && m_dwBulletCreTime + 200 < GetTickCount64())
+	if (GetAsyncKeyState('Q') && m_dwBulletCreTime + 200 < GetTickCount64())
 	{
 		// È¸ÀüÅº
 		m_pBulletList->push_back(CAbstractFactory<CRotationBullet>::Create(m_tInfo.fX, m_tInfo.fY, Vec2{ 0.f,-1.f }));
 		m_dwBulletCreTime = GetTickCount64();
 	}
-	if (GetAsyncKeyState('V') && m_dwShieldCreTime + 200 < GetTickCount64())
+	if (GetAsyncKeyState('E') && m_dwShieldCreTime + 200 < GetTickCount64())
 	{
 		Create_Shield();
 		m_dwShieldCreTime = GetTickCount64();

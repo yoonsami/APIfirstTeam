@@ -3,7 +3,7 @@
 
 CRotationBullet::CRotationBullet()
     : m_bIsFire(false),
-    m_fRotationSize(10.f),
+    m_fRotationSize(25.f),
     m_fBulletCenterX(0.f),
     m_fBulletCenterY(0.f),
     m_fBulletAngle(0.f)
@@ -12,6 +12,7 @@ CRotationBullet::CRotationBullet()
 
 CRotationBullet::~CRotationBullet()
 {
+
 }
 
 void CRotationBullet::Init()
@@ -19,7 +20,7 @@ void CRotationBullet::Init()
     m_tInfo.fCX = 20.f;
     m_tInfo.fCY = 20.f;
     
-    m_fSpeed = 1.f;
+    m_fSpeed = 3.f;
     m_eFigure = FIGURETYPE::FT_CIRCLE;
 }
 
@@ -43,7 +44,7 @@ int CRotationBullet::Update()
     m_fBulletCenterX += m_tDirection.vX * m_fSpeed;
     m_fBulletCenterY += m_tDirection.vY * m_fSpeed;
     
-    m_fBulletAngle += 15.f;
+    m_fBulletAngle += 30.f;
 
     m_tInfo.fX = m_fBulletCenterX + m_fRotationSize * cosf(m_fBulletAngle * (PI / 180));
     m_tInfo.fY = m_fBulletCenterY + m_fRotationSize * sinf(m_fBulletAngle * (PI / 180));

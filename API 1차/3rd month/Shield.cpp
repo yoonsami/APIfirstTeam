@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Shield.h"
 
+CShield::CShield(CObject* pOwner): m_pOwner(pOwner)
+{
+
+}
+
 CShield::~CShield()
 {
 	Release();

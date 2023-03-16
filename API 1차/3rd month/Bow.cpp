@@ -2,7 +2,7 @@
 #include "Bow.h"
 #include "Player_Yoonseong.h"
 
-CBow::CBow(CObject* _Owner) : m_pOwner(_Owner), m_fRadius(BOWRADIUS),m_tArrowTail{}
+CBow::CBow(CObject* _Owner) :CObject(OT_END), m_pOwner(_Owner), m_fRadius(BOWRADIUS),m_tArrowTail{}
 {
 
 }

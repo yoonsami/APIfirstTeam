@@ -3,7 +3,7 @@
 #include "MainGame.h"
 #include "Arrow.h"
 
-CObject::CObject() : m_fSpeed(0.f), m_bDead(false), m_bInvincible(false), m_bOnGround(false),m_eFigure(FIGURETYPE::FT_RECT),m_tDirection{}, m_fAimRadian(0.f), m_tStat{ 10.f,10.f,10.f}
+CObject::CObject(int objectType) : m_iObjectType(objectType) ,m_fSpeed(0.f), m_bDead(false), m_bInvincible(false), m_bOnGround(false),m_eFigure(FIGURETYPE::FT_RECT),m_tDirection{}, m_fAimRadian(0.f), m_tStat{ 10.f,10.f,10.f}
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));

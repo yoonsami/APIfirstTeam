@@ -44,3 +44,32 @@ struct ARROWPOINT
 	Vec2 Head;
 	Vec2 Tail;
 };
+
+struct ROTATEPOINT
+{
+	FLOAT vX =1.f;
+	FLOAT vY= 1.f;
+	void operator++()
+	{
+		if (vX > 0 && vY > 0)
+		{
+			vX = -1.f;
+			vY = 1.f;
+		}
+		else if (vX < 0 && vY>0)
+		{
+			vX = -1.f;
+			vY = -1.f;
+		}
+		else if (vX < 0 && vY<0)
+		{
+			vX = 1.f;
+			vY = -1.f;
+		}
+		else if (vX > 0 && vY < 0)
+		{
+			vX = 1.f;
+			vY = 1.f;
+		}
+	}
+};

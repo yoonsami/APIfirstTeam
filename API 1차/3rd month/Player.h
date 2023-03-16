@@ -19,7 +19,6 @@ public:
 public:
 	void Set_Bullet(list<CObject*>* _bulletList) { m_pBulletList = _bulletList; }
 	void Set_GuidedBullet(list<CObject*>* _bulletList) { m_pGuidedBulletList = _bulletList; }
-	void Set_Shield(list<CObject*>* _shieldList) { m_pShieldList = _shieldList; }
 	
 
 private:
@@ -28,7 +27,6 @@ private:
 protected:
 	list<CObject*>* m_pBulletList;
 	list<CObject*>* m_pGuidedBulletList;
-	list<CObject*>* m_pShieldList;
 	DWORD64			m_dwBulletCreTime;
 	DWORD64			m_dwShieldCreTime;
 	Vec2			m_tKeyInputVec;

@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Bullet.h"
 
-CBullet::CBullet()
+CBullet::CBullet() : CObject(OT_BULLET)
 {
+
 }
 
 CBullet::~CBullet()

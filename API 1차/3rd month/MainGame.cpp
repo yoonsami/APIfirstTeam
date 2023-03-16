@@ -8,9 +8,12 @@
 #include "Mouse.h"
 #include "GuidedBullet.h"
 #include "ExtremeArrow.h"
+#include "Boss.h"
+#include "Block.h"
 
 CMainGame::CMainGame() 
 	: m_dwFPSTime(GetTickCount64()),
+	m_dwBLOCKCreTime(GetTickCount64()),
 	m_dwMonsterCreTime(0), 
 	m_DC(nullptr), 
 	m_iFPS(0)
@@ -35,10 +38,14 @@ void CMainGame::Init()
 
 	dynamic_cast<CPlayer*>(m_objList[OT_PLAYER].front())->Set_Bullet(&m_objList[OT_BULLET]);
 	dynamic_cast<CPlayer*>(m_objList[OT_PLAYER].front())->Set_GuidedBullet(&m_objList[OT_GUIDEDBULLET]);
-	dynamic_cast<CPlayer*>(m_objList[OT_PLAYER].front())->Set_Shield(&m_objList[OT_SHIELD]);
-
 	m_objList[OT_MOUSE].push_back(CAbstractFactory<CMouse>::Create());
-
+	if (iStageNum == STAGE_TWO)
+	{
+		m_objList[OT_MONSTER].push_back(CAbstractFactory<CBoss>::Create());
+		dynamic_cast<CBoss*>(m_objList[OT_MONSTER].front())->Set_Bullet(&m_objList[OT_MONSTERBULLET]);
+		dynamic_cast<CBoss*>(m_objList[OT_MONSTER].front())->Set_MonsterList(&m_objList[OT_MONSTER]);
+		dynamic_cast<CBoss*>(m_objList[OT_MONSTER].front())->Create_Parts();
+	}
 	if (iStageNum == STAGE_THREE)
 	{
 		m_objList[OT_MONSTER].push_back(CAbstractFactory<CMonster>::Create());
@@ -67,7 +74,15 @@ void CMainGame::Update()
 			}
 		}
 	}
-	
+	//블럭 없을 때 생성
+	if (m_dwBLOCKCreTime + 1000 < GetTickCount64())
+	{
+		if (m_objList[OT_BLOCK].size() == 0)
+		{
+			m_objList[OT_BLOCK].push_back(CAbstractFactory<CBlock>::Create());
+		}
+	}
+
 	for (size_t i = 0; i < OT_END; ++i)
 	{
 		for (auto it = m_objList[i].begin(); it != m_objList[i].end(); )
@@ -88,8 +103,10 @@ void CMainGame::Update()
 			{
 				if(i == OT_MONSTER)
 				{
-					iScore += 10;
+					iScore += 1;
 					m_dwMonsterCreTime = GetTickCount64();
+
+					// 몬스터 분열
 					if (iStageNum == STAGE_THREE)
 					{
 						INFO tmp = (*it)->Get_Info();
@@ -128,7 +145,8 @@ void CMainGame::Late_Update()
 	CCollisionMgr::CheckCollide(m_objList[OT_MONSTER], m_objList[OT_BULLET]);
 	CCollisionMgr::CheckCollide(m_objList[OT_MONSTER], m_objList[OT_GUIDEDBULLET]);
 	CCollisionMgr::CheckCollide(m_objList[OT_PLAYER], m_objList[OT_MONSTERBULLET]);
-
+	CCollisionMgr::CheckCollide(m_objList[OT_BLOCK], m_objList[OT_BULLET]);
+	CCollisionMgr::CheckCollide(m_objList[OT_BLOCK], m_objList[OT_GUIDEDBULLET]);
 	
 }
 

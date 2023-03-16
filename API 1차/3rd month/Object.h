@@ -5,7 +5,7 @@ class CArrow;
 class CObject
 {
 public:
-	CObject();
+	CObject(int objectType);
 	virtual ~CObject();
 
 public:
@@ -15,7 +15,6 @@ public:
 	virtual void		Render(HDC hDC)PURE;
 	virtual void		Release()PURE;
 	virtual void		Accelerated();
-
 public:
 	RECT&		Get_Rect() { return m_tRect; }
 	INFO&		Get_Info() { return m_tInfo; }
@@ -36,7 +35,7 @@ public:
 	void		Set_VelX(FLOAT velX) { m_tVel.vX = velX; }
 	void		Set_VelY(FLOAT velY) { m_tVel.vY = velY; }
 	void		Set_Size(float _fCX, float _fCY);
-
+	INT			Get_ObjectType() { return m_iObjectType; }
 protected:
 	void		Update_Rect();
 	
@@ -54,5 +53,6 @@ protected:
 	Vec2		m_tDirection;
 	FLOAT		m_fAimRadian;
 	list<ARROWPOINT> m_tHitArrow;
+	INT			m_iObjectType;
 };
 
